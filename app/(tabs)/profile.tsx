@@ -9,7 +9,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { useAchievements } from '@/hooks/useAchievements';
 
-const DOUGH_COIN_IMAGE = 'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg';
+
 
 export default function ProfileScreen() {
   const { profile, updateProfile, signOut } = useAuth();
@@ -184,7 +184,7 @@ export default function ProfileScreen() {
           <View style={styles.statsContainer}>
             <View style={styles.statCard}>
               <Image 
-                source={{ uri: DOUGH_COIN_IMAGE }} 
+                source={require('@/assets/images/coin.png')}
                 style={styles.statIcon} 
                 resizeMode="contain"
               />

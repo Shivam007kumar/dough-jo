@@ -106,7 +106,7 @@ export function QuizCard({ quiz, completed, onComplete }: QuizCardProps) {
       <View style={styles.footer}>
         <View style={styles.rewardContainer}>
           <Image 
-            source={{ uri: DOUGH_COIN_IMAGE }} 
+            source={require('@/assets/images/coin.png')} 
             style={styles.coinIcon} 
             resizeMode="contain"
           />

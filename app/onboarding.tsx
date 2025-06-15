@@ -14,19 +14,19 @@ const SLIDES = [
     title: "Welcome to DoughJo!",
     subtitle: "Level up your money game with DoughJo Sensei",
     description: "Learn financial skills through fun, bite-sized lessons. Earn rewards and track your progress as you master your finances.",
-    imageUrl: "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg"
+    image: require('@/assets/images/onboarding-1.png')
   },
   {
     title: "Master Financial Skills",
     subtitle: "Train in different financial dojos",
     description: "Progress through our skill tree to learn budgeting, saving, investing, and more. Each completed lesson brings you closer to financial mastery.",
-    imageUrl: "https://images.pexels.com/photos/4386437/pexels-photo-4386437.jpeg"
+    image: require('@/assets/images/onboarding-2.png')
   },
   {
     title: "Earn While You Learn",
     subtitle: "Collect Dough Coins & achievements",
     description: "Complete lessons, maintain streaks, and tackle challenges to earn Dough Coins and unlock special rewards.",
-    imageUrl: "https://images.pexels.com/photos/4386342/pexels-photo-4386342.jpeg"
+    image: require('@/assets/images/doughjoan.gif')
   }
 ];
 
@@ -55,7 +55,7 @@ export default function Onboarding() {
               <SenseiWelcome style={styles.senseiContainer} />
             ) : (
               <Image 
-                source={{ uri: SLIDES[currentSlide].imageUrl }}
+                source={SLIDES[currentSlide].image}
                 style={styles.image}
                 resizeMode="contain"
               />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import Colors from '@/constants/Colors';
 import { SPACING, FONT_SIZE, FONT_WEIGHT, BORDER_RADIUS } from '@/constants/Theme';
@@ -7,8 +7,6 @@ import { StreakCounter } from '@/components/StreakCounter';
 import { LessonCard } from '@/components/LessonCard';
 import { SenseiDashboard } from '@/components/Sensei';
 import { QuizCard } from '@/components/QuizCard';
-
-const DOUGH_COIN_IMAGE = 'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg';
 
 const dailyQuizzes = [
   {
@@ -50,6 +48,19 @@ export default function HomeScreen() {
   const [currentBelt, setCurrentBelt] = useState('yellow');
   const [completedQuizzes, setCompletedQuizzes] = useState<string[]>([]);
   
+  // Get current time in India (IST, UTC+5:30)
+  const greeting = useMemo(() => {
+    const now = new Date();
+    // Convert to IST (India Standard Time)
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const istOffset = 5.5 * 60 * 60000; // 5 hours 30 minutes in ms
+    const istTime = new Date(utc + istOffset);
+    const hour = istTime.getHours();
+    if (hour < 12) return 'Good morning!';
+    if (hour < 18) return 'Good afternoon!';
+    return 'Good evening!';
+  }, []);
+
   const handleQuizComplete = (quizId: string, isCorrect: boolean, reward: number) => {
     if (isCorrect && !completedQuizzes.includes(quizId)) {
       setCompletedQuizzes(prev => [...prev, quizId]);
@@ -66,14 +77,14 @@ export default function HomeScreen() {
         {/* Header with greeting and stats */}
         <View style={styles.header}>
           <View style={styles.greetingContainer}>
-            <Text style={styles.greeting}>Good morning!</Text>
+            <Text style={styles.greeting}>{greeting}</Text>
             <Text style={styles.subGreeting}>Ready to level up your money skills?</Text>
           </View>
           <View style={styles.statsContainer}>
             <StreakCounter days={streakDays} />
             <View style={styles.coinsContainer}>
               <Image 
-                source={{ uri: DOUGH_COIN_IMAGE }} 
+                source={require('@/assets/images/coin.png')} 
                 style={styles.coinIcon} 
                 resizeMode="contain"
               />
@@ -87,7 +98,7 @@ export default function HomeScreen() {
           <SenseiDashboard style={styles.senseiImage} />
           <View style={styles.senseiMessageContainer}>
             <Text style={styles.senseiMessage}>
-              "Continue your daily training to become a financial master!"
+              "Train daily. Master your money."
             </Text>
           </View>
         </View>
@@ -224,7 +235,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.achievementReward}>
               <Image 
-                source={{ uri: DOUGH_COIN_IMAGE }} 
+                source={require('@/assets/images/coin.png')} 
                 style={styles.achievementCoin} 
                 resizeMode="contain"
               />
@@ -295,19 +306,25 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.xl,
     backgroundColor: Colors.background.secondary,
     borderRadius: BORDER_RADIUS.lg,
-    padding: SPACING.md,
+    padding: SPACING.lg,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 6,
   },
   senseiImage: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
     flexShrink: 0,
+    marginRight: SPACING.lg,
   },
   senseiMessageContainer: {
     flex: 1,
-    marginLeft: SPACING.md,
+    marginLeft: 0,
     backgroundColor: Colors.background.tertiary,
     borderRadius: BORDER_RADIUS.md,
-    padding: SPACING.md,
+    padding: SPACING.lg,
   },
   senseiMessage: {
     fontFamily: 'Inter-Medium',

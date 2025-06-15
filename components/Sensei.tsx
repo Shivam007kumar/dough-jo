@@ -50,7 +50,7 @@ export const SenseiWelcome = ({ style }: SenseiProps) => {
   return (
     <Animated.View style={[styles.container, style, animatedStyle]}>
       <Image
-        source={{ uri: 'https://images.pexels.com/photos/6940413/pexels-photo-6940413.jpeg' }}
+        source={require('@/assets/images/smiling doughjo.png')}
         style={styles.image}
         resizeMode="contain"
       />
@@ -79,7 +79,7 @@ export const SenseiDashboard = ({ style }: SenseiProps) => {
   return (
     <Animated.View style={[styles.container, style, animatedStyle]}>
       <Image
-        source={{ uri: 'https://images.pexels.com/photos/6941021/pexels-photo-6941021.jpeg' }}
+        source={require('@/assets/images/smiling doughjo.png')}
         style={styles.image}
         resizeMode="contain"
       />
@@ -91,7 +91,7 @@ export const SenseiProfile = ({ style }: SenseiProps) => {
   return (
     <View style={[styles.container, style]}>
       <Image
-        source={{ uri: 'https://images.pexels.com/photos/6940432/pexels-photo-6940432.jpeg' }}
+        source={require('@/assets/images/smiling doughjo.png')}
         style={styles.image}
         resizeMode="contain"
       />
@@ -118,7 +118,7 @@ export const SenseiSuccess = ({ style }: SenseiProps) => {
   return (
     <Animated.View style={[styles.container, style, animatedStyle]}>
       <Image
-        source={{ uri: 'https://images.pexels.com/photos/6940437/pexels-photo-6940437.jpeg' }}
+        source={require('@/assets/images/smiling doughjo.png')}
         style={styles.image}
         resizeMode="contain"
       />
@@ -130,9 +130,13 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent',
+    borderRadius: 0,
   },
   image: {
     width: '100%',
     height: '100%',
+    backgroundColor: 'transparent',
+    transform: [{ scale: 1.3 }, { translateY: -15 }],
   },
 });
